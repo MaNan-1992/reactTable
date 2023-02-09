@@ -196,9 +196,26 @@ export default class App extends Component {
     }
   };
   //修改行内容
-  changRow = (record,e) => {
-    console.log(record)
-    console.log(e.target.value)
+  changRow = (record,type, e) => {
+    let data = this.state.data;
+    data = dsFilter(data, record.key);
+    console.log(data)
+    this.setState({
+      data,
+    });
+    function dsFilter(dealData, dealKey) {
+      for (let i = 0; i < dealData.length; i++) {
+        if (dealData[i].children && dealData[i].children.length > 0) {
+          dealData[i].children = dsFilter(dealData[i].children, dealKey);
+        }
+      }
+      dealData.forEach((item) => {
+        if (item.key === dealKey) {
+          item[type]=e.target.value
+        }
+      });
+      return dealData;
+    }
   };
   render() {
     return (
@@ -220,7 +237,7 @@ export default class App extends Component {
               <Input
                 placeholder="题目"
                 defaultValue={title}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "title", e)}
               />
             )}
           />
@@ -234,7 +251,7 @@ export default class App extends Component {
                 <Input
                   placeholder="类型"
                   defaultValue={text1}
-                  onChange={(e) => this.changRow(record, e)}
+                  onChange={(e) => this.changRow(record, "text1", e)}
                 />
               )}
             />
@@ -247,7 +264,7 @@ export default class App extends Component {
                 <Input
                   placeholder="二级"
                   defaultValue={text2}
-                  onChange={(e) => this.changRow(record, e)}
+                  onChange={(e) => this.changRow(record, "text2", e)}
                 />
               )}
             />
@@ -261,7 +278,7 @@ export default class App extends Component {
               <Input
                 placeholder="内容"
                 defaultValue={content}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "content", e)}
               />
             )}
           />
@@ -274,7 +291,7 @@ export default class App extends Component {
               <Input
                 placeholder="答案"
                 defaultValue={answer}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "answer", e)}
               />
             )}
           />
@@ -287,7 +304,7 @@ export default class App extends Component {
               <Input
                 placeholder="类型"
                 defaultValue={version}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "version", e)}
               />
             )}
           />
@@ -300,7 +317,7 @@ export default class App extends Component {
               <Input
                 placeholder="版本"
                 defaultValue={mark_type}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "mark_type", e)}
               />
             )}
           />
@@ -313,7 +330,7 @@ export default class App extends Component {
               <Input
                 placeholder="一级内容点"
                 defaultValue={value1}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "value1", e)}
               />
             )}
           />
@@ -326,7 +343,7 @@ export default class App extends Component {
               <Input
                 placeholder="二级内容点"
                 defaultValue={value2}
-                onChange={(e) => this.changRow(record, e)}
+                onChange={(e) => this.changRow(record, "value2", e)}
               />
             )}
           />
