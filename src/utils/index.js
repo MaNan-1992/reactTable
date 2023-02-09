@@ -4,7 +4,7 @@ export function deepClone(target) {
         return target;
     }
     var result;
-    if (Object.prototype.toString.call(target) == '[object Array]') {
+    if (Object.prototype.toString.call(target) === '[object Array]') {
         // 数组
         result = []
     } else {
