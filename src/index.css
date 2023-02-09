@@ -1,0 +1,17 @@
+.title{
+    margin:20px;
+    text-align: center;
+}
+.ant-table{
+    background: #fff;
+}
+.ant-table-thead{
+    display: none;
+}
+.ant-table-tbody .ant-table-row td:nth-child(1){
+    display: flex;
+    align-items: center;
+}
+.ant-table-tbody .ant-table-row td:nth-child(1) .ant-table-row-expand-icon{
+    padding:8px
+}
